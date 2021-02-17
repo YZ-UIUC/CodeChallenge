@@ -1,0 +1,30 @@
+class Solution {
+    int res = 0;
+    public int countArrangement(int n) {
+        int[] nums = new int[n];
+        for(int i = 1; i <= n; i++){
+            nums[i - 1] = i;
+        }
+        
+        recursion(nums, 0);
+        return res;
+            
+    }    
+    private void recursion(int[] nums, int l){
+        if(l == nums.length){
+            res++;
+        }
+        for(int i = l; i < nums.length; i++){
+            swap(nums, i, l);
+            if(nums[l] % (l + 1) == 0 || (l + 1) % nums[l] == 0){
+                recursion(nums, l + 1);
+            }
+            swap(nums, i, l);
+        }
+    }    
+    private void swap(int[] nums, int x, int y){
+        int tmp = nums[x];
+        nums[x] = nums[y];
+        nums[y] = tmp;
+    }
+}
