@@ -1,0 +1,24 @@
+class Solution {
+    public List<String> generateAbbreviations(String word) {
+        List<String> result = new ArrayList<>();
+        helper(word, result, "", 0, 0);
+        return result;    
+    }
+    
+    public void helper(String word, List<String> result, String path, int count, int pos){
+        if(pos == word.length()){
+            if(count > 0){
+                path += count;
+            }
+            result.add(path);
+            return;
+        } else {
+            // abbreviate this character
+            helper(word, result, path, count + 1, pos + 1);
+            
+            // not abbreviate the character
+            helper(word, result, path +(count > 0 ? count : "") + word.charAt(pos), 0, pos + 1);
+        }
+        
+    }
+}
